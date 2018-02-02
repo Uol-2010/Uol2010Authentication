@@ -1,0 +1,88 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-configuration PUBLIC
+"-//Hibernate/Hibernate Configuration DTD//EN"
+"http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+	<session-factory>
+		<!-- <property name="connection.datasource">java:comp/env/jdbc/MD_CD</property> 
+			<property name="show_sql">false</property> <property name="dialect">org.hibernate.dialect.MySQL5InnoDBDialect</property> -->
+
+		<property name="hibernate.bytecode.use_reflection_optimizer">false</property>
+		<property name="hibernate.connection.password">Serviziingressi</property>
+		<property name="hibernate.connection.url">jdbc:postgresql://dbservertest.bncf.lan:5434/Servizi?autoReconnect=true&amp;serverTimezone=UTC&amp;useSSL=false</property>
+		<property name="hibernate.connection.username">serviziingressi</property>
+		<property name="hibernate.connection.validationQuery">select 1</property>
+
+		<property name="connection.autoReconnect">true</property>
+		<property name="connection.autoReconnectForPools">true</property>
+		<property name="connection.is-connection-validation-required">true</property>
+		<property name="hibernate.connection.autoReconnect">true</property>
+
+		<property name="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</property>
+		<property name="hibernate.connection.driver_class">org.postgresql.Driver</property>
+
+		<!-- Quando una connessione inattiva viene rimosso dal pool (in seconda). 
+			Sospensione di default: 0, non scadono mai. -->
+		<property name="hibernate.c3p0.timeout">300</property>
+		<!-- tempo di inattività in secondi prima che una connessione viene convalidato 
+			automaticamente. Sospensione di default: 0 -->
+		<property name="hibernate.c3p0.idle_test_period">600</property>
+		<property name="hibernate.c3p0.preferredTestQuery">select 1</property>
+		<property name="hibernate.c3p0.testWhileIdle">true</property>
+		<property name="hibernate.c3p0.testConnectionOnCheckout">true</property>
+
+		<property name="show_sql">false</property>
+		<property name="format_sql">false</property>
+		<property name="use_sql_comments">false</property>
+
+		<mapping resource="net/bncf/uol2010/database/schema/servizi/entity/AutBibAutUte.hbm.xml" />
+		<mapping resource="net/bncf/uol2010/database/schema/servizi/entity/AutBibModAmm.hbm.xml" />
+		<mapping resource="net/bncf/uol2010/database/schema/servizi/entity/AutBibServizi.hbm.xml" />
+		<mapping resource="net/bncf/uol2010/database/schema/servizi/entity/Autorizzazione.hbm.xml" />
+		<mapping resource="net/bncf/uol2010/database/schema/servizi/entity/AutorizzazioniBib.hbm.xml" />
+		<mapping resource="net/bncf/uol2010/database/schema/servizi/entity/AutorizzazioniUte.hbm.xml" />
+		<mapping resource="net/bncf/uol2010/database/schema/servizi/entity/AutUteServizi.hbm.xml" />
+		<mapping resource="net/bncf/uol2010/database/schema/servizi/entity/CalendarioEccezioni.hbm.xml" />
+		<mapping resource="net/bncf/uol2010/database/schema/servizi/entity/CalendarioFestivita.hbm.xml" />
+		<mapping resource="net/bncf/uol2010/database/schema/servizi/entity/CalendarioSettimanale.hbm.xml" />
+		<mapping resource="net/bncf/uol2010/database/schema/servizi/entity/CalendarioSospensioni.hbm.xml" />
+		<mapping resource="net/bncf/uol2010/database/schema/servizi/entity/Carrello.hbm.xml" />
+		<mapping resource="net/bncf/uol2010/database/schema/servizi/entity/CarrelloLibro.hbm.xml" />
+		<mapping resource="net/bncf/uol2010/database/schema/servizi/entity/Cassettiera.hbm.xml" />
+		<mapping resource="net/bncf/uol2010/database/schema/servizi/entity/CodiceAttivita.hbm.xml" />
+		<mapping resource="net/bncf/uol2010/database/schema/servizi/entity/ConfVarchi.hbm.xml" />
+		<mapping resource="net/bncf/uol2010/database/schema/servizi/entity/Contatori.hbm.xml" />
+		<mapping resource="net/bncf/uol2010/database/schema/servizi/entity/ControlliServizio.hbm.xml" />
+		<mapping resource="net/bncf/uol2010/database/schema/servizi/entity/Controllo.hbm.xml" />
+		<mapping resource="net/bncf/uol2010/database/schema/servizi/entity/Disponibilita.hbm.xml" />
+		<mapping resource="net/bncf/uol2010/database/schema/servizi/entity/Fruibilita.hbm.xml" />
+		<mapping resource="net/bncf/uol2010/database/schema/servizi/entity/GestioneChiamate.hbm.xml" />
+		<mapping resource="net/bncf/uol2010/database/schema/servizi/entity/GestioneDeposito.hbm.xml" />
+		<mapping resource="net/bncf/uol2010/database/schema/servizi/entity/GruppoSegnature.hbm.xml" />
+		<mapping resource="net/bncf/uol2010/database/schema/servizi/entity/Ingressi.hbm.xml" />
+		<mapping resource="net/bncf/uol2010/database/schema/servizi/entity/IterServizio.hbm.xml" />
+		<mapping resource="net/bncf/uol2010/database/schema/servizi/entity/IterServizioLegami.hbm.xml" />
+		<mapping resource="net/bncf/uol2010/database/schema/servizi/entity/MenuBanco.hbm.xml" />
+		<mapping resource="net/bncf/uol2010/database/schema/servizi/entity/ModuliAmministrazione.hbm.xml" />
+		<mapping resource="net/bncf/uol2010/database/schema/servizi/entity/Richieste.hbm.xml" />
+		<mapping resource="net/bncf/uol2010/database/schema/servizi/entity/Servizi.hbm.xml" />
+		<mapping resource="net/bncf/uol2010/database/schema/servizi/entity/ServiziFruibilita.hbm.xml" />
+		<mapping resource="net/bncf/uol2010/database/schema/servizi/entity/SezioniSegnature.hbm.xml" />
+		<mapping resource="net/bncf/uol2010/database/schema/servizi/entity/SingolaSegnatura.hbm.xml" />
+		<mapping resource="net/bncf/uol2010/database/schema/servizi/entity/Sospensioni.hbm.xml" />
+		<mapping resource="net/bncf/uol2010/database/schema/servizi/entity/Stampante.hbm.xml" />
+		<mapping resource="net/bncf/uol2010/database/schema/servizi/entity/StampanteColore.hbm.xml" />
+		<mapping resource="net/bncf/uol2010/database/schema/servizi/entity/StampanteModello.hbm.xml" />
+		<mapping resource="net/bncf/uol2010/database/schema/servizi/entity/StampantiAutorizzazioni.hbm.xml" />
+		<mapping resource="net/bncf/uol2010/database/schema/servizi/entity/StatoIter.hbm.xml" />
+		<mapping resource="net/bncf/uol2010/database/schema/servizi/entity/StatoMovimento.hbm.xml" />
+		<mapping resource="net/bncf/uol2010/database/schema/servizi/entity/TrafficoWirelessAperto.hbm.xml" />
+		<mapping resource="net/bncf/uol2010/database/schema/servizi/entity/TrafficoWirelessComplessivo.hbm.xml" />
+		<mapping resource="net/bncf/uol2010/database/schema/servizi/entity/Utente.hbm.xml" />
+		<mapping resource="net/bncf/uol2010/database/schema/servizi/entity/UtenteBib.hbm.xml" />
+		<mapping resource="net/bncf/uol2010/database/schema/servizi/entity/UtenteCittadinanza.hbm.xml" />
+		<mapping resource="net/bncf/uol2010/database/schema/servizi/entity/UtenteProfessione.hbm.xml" />
+		<mapping resource="net/bncf/uol2010/database/schema/servizi/entity/UtenteProvenienza.hbm.xml" />
+		<mapping resource="net/bncf/uol2010/database/schema/servizi/entity/UtenteTipoDocumento.hbm.xml" />
+	</session-factory>
+</hibernate-configuration>

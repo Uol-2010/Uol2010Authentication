@@ -1,0 +1,179 @@
+<?xml version="1.0"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>net.bncf.servlet</groupId>
+		<artifactId>Uol2010Authentication</artifactId>
+		<version>1.0.0</version>
+	</parent>
+	<groupId>net.bncf.servlet.authentication</groupId>
+	<artifactId>Authentication</artifactId>
+	<packaging>war</packaging>
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<maven.compiler.source>1.8</maven.compiler.source>
+		<maven.compiler.target>1.8</maven.compiler.target>
+	</properties>
+	<build>
+		<sourceDirectory>src/main/java</sourceDirectory>
+		<finalName>Authentication##${project.version}</finalName>
+		<resources>
+			<resource>
+				<directory>src/main/java</directory>
+				<excludes>
+					<exclude>**/*.java</exclude>
+				</excludes>
+			</resource>
+		   	<resource>
+		   		<directory>src/main/resources</directory>
+		  		<excludes>
+			  		<exclude>**/hibernate.cfg.prod.xml</exclude>
+			  		<exclude>**/hibernate.cfg.test.xml</exclude>
+			  		<exclude>**/hibernate.cfg.svil.xml</exclude>
+			  		<exclude>**/log4j.prod.xml</exclude>
+			  		<exclude>**/log4j.test.xml</exclude>
+			  		<exclude>**/log4j.svil.xml</exclude>
+		  		</excludes>
+		   	</resource>
+		</resources>
+		<plugins>
+			<plugin>
+				<artifactId>maven-war-plugin</artifactId>
+				<version>3.2.0</version>
+				<configuration>
+					<source>1.8</source>
+					<target>1.8</target>
+				</configuration>
+				<executions>
+	            		<execution>
+	            			<phase>test</phase>
+              			<configuration>
+	                			<tasks>
+                  				<delete file="${project.build.outputDirectory}/hibernate.cfg.xml"/>
+                  				<delete file="${project.build.outputDirectory}/log4j.xml"/>
+                  				<copy file="src/main/resources/hibernate.cfg.svil.xml" tofile="${project.build.outputDirectory}/hibernate.cfg.xml"/>
+                  				<copy file="src/main/resources/log4j.svil.xml" tofile="${project.build.outputDirectory}/log4j.xml"/>
+	                			</tasks>
+              			</configuration>
+	            		</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+	<dependencies>
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>servlet-api</artifactId>
+			<version>2.5</version>
+			<scope>runtime</scope>
+		</dependency>
+		<dependency>
+			<groupId>net.bncf.uol2010.xsd</groupId>
+			<artifactId>ModuloGestioneXsdBncf</artifactId>
+			<version>1.0.2</version>
+		</dependency>
+		<dependency>
+			<groupId>mx.randalf.digest</groupId>
+			<artifactId>RandalfDigest</artifactId>
+			<version>1.0.3</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.tomcat</groupId>
+			<artifactId>tomcat-catalina</artifactId>
+			<version>8.0.37</version>
+			<scope>provided</scope>
+			<optional>true</optional>
+		</dependency>
+	</dependencies>
+	<version>2.0.2</version>
+		<profiles>
+		<profile>
+			<id>default</id>
+			<properties>
+				<myAction>svil</myAction>
+			</properties>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+		</profile>
+		<profile>
+			<id>prod</id>
+			<properties>
+				<myAction>prod</myAction>
+			</properties>
+			<build>
+				<finalName>Authentication##${project.version}-prod</finalName>
+				<plugins>
+					<plugin>
+           				<artifactId>maven-antrun-plugin</artifactId>
+           				<executions>
+             				<execution>
+             					<!--  phase>test</phase-->
+             				   <phase>prepare-package</phase>
+               					<goals>
+                 					<goal>run</goal>
+               					</goals>
+               					<configuration>
+                 					<tasks>
+                   						<delete file="${project.build.outputDirectory}/hibernate.cfg.xml"/>
+		                  				<delete file="${project.build.outputDirectory}/log4j.xml"/>
+                   						<copy file="src/main/resources/hibernate.cfg.prod.xml"
+                         					tofile="${project.build.outputDirectory}/hibernate.cfg.xml"/>
+		                  				<copy file="src/main/resources/log4j.prod.xml"
+		                        			tofile="${project.build.outputDirectory}/log4j.xml"/>
+             				     </tasks>
+             				   </configuration>
+             				</execution>
+           				</executions>
+					</plugin>
+         			<plugin>
+           				<artifactId>maven-surefire-plugin</artifactId>
+           				<configuration>
+             				<skip>true</skip>
+           				</configuration>
+         			</plugin>
+   				</plugins>
+			</build>
+		</profile>
+		<profile>
+			<id>test</id>
+			<properties>
+				<myAction>test</myAction>
+			</properties>
+			<build>
+				<finalName>Authentication##${project.version}-test</finalName>
+				<plugins>
+					<plugin>
+           				<artifactId>maven-antrun-plugin</artifactId>
+           				<executions>
+             				<execution>
+             					<phase>test</phase>
+               					<goals>
+                 					<goal>run</goal>
+               					</goals>
+               					<configuration>
+                 					<tasks>
+                   						<delete file="${project.build.outputDirectory}/hibernate.cfg.xml"/>
+		                  				<delete file="${project.build.outputDirectory}/log4j.xml"/>
+                   						<copy file="src/main/resources/hibernate.cfg.test.xml"
+                         					tofile="${project.build.outputDirectory}/hibernate.cfg.xml"/>
+		                  				<copy file="src/main/resources/log4j.test.xml"
+		                        			tofile="${project.build.outputDirectory}/log4j.xml"/>
+                 					</tasks>
+               					</configuration>
+             				</execution>
+           				</executions>
+					</plugin>
+         			<plugin>
+           				<artifactId>maven-surefire-plugin</artifactId>
+           				<configuration>
+             				<skip>true</skip>
+           				</configuration>
+         			</plugin>
+   				</plugins>
+			</build>
+		</profile>
+	</profiles>
+	
+</project>
